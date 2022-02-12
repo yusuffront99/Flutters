@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:shamo/pages/sign_page.dart';
+import 'package:shamo/pages/splash_page.dart';
+import 'package:shamo/themes/theme.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,21 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'Hello Developer',
-          style: GoogleFonts.poppins(fontSize: 50),
-        ),
-      ),
+      routes: {
+        '/': (context) => SplashPage(),
+        '/sign-in': (context) => SignPage(),
+      },
     );
   }
 }
