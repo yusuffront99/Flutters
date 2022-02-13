@@ -32,7 +32,7 @@ class SignUpPage extends StatelessWidget {
     //==== FULL NAME Field
     Widget nameInput() {
       return Container(
-        margin: EdgeInsets.only(top: 40.0),
+        margin: EdgeInsets.only(top: 50.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -219,7 +219,7 @@ class SignUpPage extends StatelessWidget {
       return Container(
         height: 50,
         width: double.infinity,
-        margin: EdgeInsets.only(top: 20.0),
+        margin: EdgeInsets.only(top: 30.0),
         child: TextButton(
           onPressed: () {
             Navigator.pushNamed(context, '/home');
@@ -271,18 +271,20 @@ class SignUpPage extends StatelessWidget {
           margin: EdgeInsets.symmetric(
             horizontal: defaultMargin,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              header(),
-              nameInput(),
-              usernameInput(),
-              emailInput(),
-              passwordInput(),
-              signInButton(),
-              Spacer(),
-              footer()
-            ],
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                header(),
+                nameInput(),
+                usernameInput(),
+                emailInput(),
+                passwordInput(),
+                signInButton(),
+                Spacer(),
+                footer()
+              ],
+            ),
           ),
         ),
       ),

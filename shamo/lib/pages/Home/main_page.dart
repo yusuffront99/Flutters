@@ -34,7 +34,7 @@ class _MainPageState extends State<MainPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
         child: BottomAppBar(
           shape: CircularNotchedRectangle(),
-          notchMargin: 10,
+          notchMargin: 13,
           clipBehavior: Clip.antiAlias,
           child: BottomNavigationBar(
             backgroundColor: backgroundColor4,
@@ -47,34 +47,46 @@ class _MainPageState extends State<MainPage> {
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_home.png',
-                  width: 21,
-                  color: currentIndex == 0 ? primaryColor : inActiveButton,
+                icon: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Image.asset(
+                    'assets/images/icon_home.png',
+                    width: 21,
+                    color: currentIndex == 0 ? primaryColor : inActiveButton,
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_chat.png',
-                  width: 20,
-                  color: currentIndex == 1 ? primaryColor : inActiveButton,
+                icon: Container(
+                  margin: EdgeInsets.only(top: 10, right: 40),
+                  child: Image.asset(
+                    'assets/images/icon_chat.png',
+                    width: 20,
+                    color: currentIndex == 1 ? primaryColor : inActiveButton,
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_favorite.png',
-                  width: 20,
-                  color: currentIndex == 2 ? primaryColor : inActiveButton,
+                icon: Container(
+                  margin: EdgeInsets.only(top: 10, left: 40),
+                  child: Image.asset(
+                    'assets/images/icon_favorite.png',
+                    width: 20,
+                    color: currentIndex == 2 ? primaryColor : inActiveButton,
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/icon_profile.png',
-                  width: 21,
-                  color: currentIndex == 3 ? primaryColor : inActiveButton,
+                icon: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Image.asset(
+                    'assets/images/icon_profile.png',
+                    width: 21,
+                    color: currentIndex == 3 ? primaryColor : inActiveButton,
+                  ),
                 ),
                 label: '',
               ),
@@ -84,6 +96,7 @@ class _MainPageState extends State<MainPage> {
       );
     }
 
+    //===>>> SHOW PAGE
     Widget content() {
       switch (currentIndex) {
         case 0:
