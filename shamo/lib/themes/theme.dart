@@ -16,6 +16,7 @@ Color secondaryTextColor = Color(0xFF999999);
 Color subtitleColor = Color(0XFF504F5E);
 Color inActiveButton = Color(0xFF808191);
 Color transparentColor = Colors.transparent;
+Color blackColor = Color(0XFF2E2E2E);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryTextColor,
@@ -28,6 +29,8 @@ TextStyle priceTextStyle = GoogleFonts.poppins(color: priceColor);
 TextStyle subtitleTextStyle = GoogleFonts.poppins(color: subtitleColor);
 
 TextStyle linkTitleStyle = GoogleFonts.poppins(color: primaryColor);
+
+TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
 
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
