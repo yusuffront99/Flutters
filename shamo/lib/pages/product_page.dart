@@ -394,7 +394,7 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/detail-chat');
+                      Navigator.pushNamed(context, '/detail-cart');
                     },
                     child: Container(
                       width: 54,
