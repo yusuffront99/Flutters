@@ -3,6 +3,7 @@ import 'package:shamo/pages/Home/chat_page.dart';
 import 'package:shamo/pages/Home/edit_profile_page.dart';
 import 'package:shamo/pages/Home/main_page.dart';
 import 'package:shamo/pages/cart_page.dart';
+import 'package:shamo/pages/checkout_page.dart';
 import 'package:shamo/pages/detail_chat_page.dart';
 import 'package:shamo/pages/product_page.dart';
 import 'package:shamo/pages/sign_in_page.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         '/detail-chat': (context) => DetailChatPage(),
         '/edit-profile': (context) => editProfilePage(),
         '/product': (context) => ProductPage(),
-        '/cart': (context) => CartPage()
+        '/cart': (context) => CartPage(),
+        '/checkout': (context) => CheckoutPage()
       },
     );
   }
