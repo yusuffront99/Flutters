@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:joumble/main.dart';
+import 'package:joumble/providers/auth_provider.dart';
 import 'package:joumble/themes/themes.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatelessWidget {
+  TextEditingController nameController = TextEditingController(text: '');
+  TextEditingController usernameController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignUp() async {
+      if (await authProvider.register(
+        name: nameController.text,
+        username: usernameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamed(context, '/home');
+      }
+    }
+
     //===============================
     Widget header() {
       return Container(
@@ -60,6 +81,7 @@ class SignUpPage extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
+                        controller: nameController,
                         decoration: InputDecoration.collapsed(
                             hintText: 'Your Full Name',
                             hintStyle: subtitleTextStyle),
@@ -106,6 +128,7 @@ class SignUpPage extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
+                        controller: usernameController,
                         decoration: InputDecoration.collapsed(
                             hintText: 'Your Username',
                             hintStyle: subtitleTextStyle),
@@ -152,6 +175,7 @@ class SignUpPage extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
+                        controller: emailController,
                         decoration: InputDecoration.collapsed(
                             hintText: 'Your Email Adress',
                             hintStyle: subtitleTextStyle),
@@ -174,7 +198,7 @@ class SignUpPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Email Adress',
+              'Password',
               style:
                   primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
             ),
@@ -198,6 +222,7 @@ class SignUpPage extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration.collapsed(
                             hintText: 'Your Password',
@@ -220,9 +245,7 @@ class SignUpPage extends StatelessWidget {
         width: double.infinity,
         margin: EdgeInsets.only(top: 30.0),
         child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/home');
-          },
+          onPressed: handleSignUp,
           child: Text(
             'Sign Up',
             style: primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
@@ -270,20 +293,18 @@ class SignUpPage extends StatelessWidget {
           margin: EdgeInsets.symmetric(
             horizontal: defaultMargin,
           ),
-          child: Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                header(),
-                nameInput(),
-                usernameInput(),
-                emailInput(),
-                passwordInput(),
-                signInButton(),
-                Spacer(),
-                footer()
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              header(),
+              nameInput(),
+              usernameInput(),
+              emailInput(),
+              passwordInput(),
+              signInButton(),
+              Spacer(),
+              footer()
+            ],
           ),
         ),
       ),
