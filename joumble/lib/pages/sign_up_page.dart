@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:joumble/main.dart';
+import 'package:joumble/pages/widgets/loading_button.dart';
 import 'package:joumble/providers/auth_provider.dart';
 import 'package:joumble/themes/themes.dart';
 import 'package:provider/provider.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nameController = TextEditingController(text: '');
+
   TextEditingController usernameController = TextEditingController(text: '');
+
   TextEditingController emailController = TextEditingController(text: '');
+
   TextEditingController passwordController = TextEditingController(text: '');
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleSignUp() async {
+      setState(() {
+        isLoading = true;
+      });
+
       if (await authProvider.register(
         name: nameController.text,
         username: usernameController.text,
@@ -22,7 +37,21 @@ class SignUpPage extends StatelessWidget {
         password: passwordController.text,
       )) {
         Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Register Failed',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
       }
+
+      setState(() {
+        isLoading = false;
+      });
     }
 
     //===============================
@@ -301,7 +330,7 @@ class SignUpPage extends StatelessWidget {
               usernameInput(),
               emailInput(),
               passwordInput(),
-              signInButton(),
+              isLoading ? LoadingButton() : signInButton(),
               Spacer(),
               footer()
             ],
