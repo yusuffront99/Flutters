@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gotop/pages/Home/chat_page.dart';
 import 'package:gotop/pages/Home/home_page.dart';
+import 'package:gotop/pages/Home/profile_page.dart';
+import 'package:gotop/pages/Home/wishlist_page.dart';
 import 'package:gotop/themes/themes.dart';
 
 class MainPage extends StatefulWidget {
@@ -98,17 +101,17 @@ class _MainPageState extends State<MainPage> {
           return HomePage();
           break;
 
-        // case 1:
-        //   return ChatPag;
-        //   break;
+        case 1:
+          return ChatPage();
+          break;
 
-        // case 2:
-        //   return WishListPage();
-        //   break;
+        case 2:
+          return WishListPage();
+          break;
 
-        // case 3:
-        //   return ProfilePage();
-        //   break;
+        case 3:
+          return ProfilePage();
+          break;
 
         default:
           return HomePage();
