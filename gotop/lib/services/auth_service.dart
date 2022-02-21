@@ -9,7 +9,7 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    var url = '';
+    var url = 'http://192.168.137.229:8000/api/register';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'name': name,
