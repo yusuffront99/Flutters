@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gotop/pages/widgets/loading_button.dart';
 import 'package:gotop/providers/auth_provider.dart';
 import 'package:gotop/themes/themes.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +45,9 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         );
       }
+      setState(() {
+        isLoading = false;
+      });
     }
 
     //=== HEADER
@@ -354,6 +358,7 @@ class _SignUpPageState extends State<SignUpPage> {
               usernameInput(),
               emailInput(),
               passwordInput(),
+              isLoading ? LoadingButton() : signInButton(),
               signInButton(),
               Spacer(),
               footer()
