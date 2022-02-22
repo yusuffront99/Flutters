@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gotop/models/user_model.dart';
 import 'package:gotop/themes/themes.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/auth_provider.dart';
 
 class editProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
     //==== INPUT FORM EDIT -- NAME
     Widget nameInput() {
       return Container(
@@ -20,7 +26,7 @@ class editProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: 'Jhon Alexander',
+                hintText: '${user.name}',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -50,7 +56,7 @@ class editProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: 'Jhon Alexander',
+                hintText: '${user.username}',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -80,7 +86,7 @@ class editProfilePage extends StatelessWidget {
             TextFormField(
               style: primaryTextStyle,
               decoration: InputDecoration(
-                hintText: '@JhonAlexander',
+                hintText: '${user.email}',
                 hintStyle: primaryTextStyle,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -111,7 +117,8 @@ class editProfilePage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage('assets/images/image_profile.png'),
+                  fit: BoxFit.fill,
+                  image: NetworkImage(user.profilePhotoUrl),
                 ),
               ),
             ),
