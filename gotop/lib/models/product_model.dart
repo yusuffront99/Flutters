@@ -7,10 +7,10 @@ class ProductModel {
   double? price;
   String? description;
   String? tags;
-  CategoryModel category;
+  CategoryModel? category;
   DateTime? createdAt;
   DateTime? updatedAt;
-  List<GalleryModel> galleries;
+  List<GalleryModel>? galleries;
 
   ProductModel({
     this.id,
@@ -18,26 +18,23 @@ class ProductModel {
     this.price,
     this.description,
     this.tags,
-    required this.category,
     this.createdAt,
     this.updatedAt,
-    required this.galleries,
+    this.galleries,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id: json['id'],
-      name: json['name'],
-      price: double.parse(json['price'].toString()),
-      description: json['description'],
-      tags: json['tags'],
-      category: CategoryModel.fromJson(json['category']),
-      galleries: json['galleries']
-          .map<GalleryModel>((gallery) => GalleryModel.fromJson(gallery))
-          .toList(),
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['created_at']),
-    );
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    price = double.parse(json['price'].toString());
+    description = json['description'];
+    tags = json['tags'];
+    category = CategoryModel.fromJson(json['category']);
+    createdAt = DateTime.parse(json['created_at']);
+    updatedAt = DateTime.parse(json['updated_at']);
+    galleries = json['galleries']
+        .map<GalleryModel>((gallery) => GalleryModel.fromJson(gallery))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -47,10 +44,10 @@ class ProductModel {
       'price': price,
       'description': description,
       'tags': tags,
-      'category': category.toJson(),
-      'galleries': galleries.map((gallery) => gallery.toJson()).toList(),
-      'createdAt': createdAt.toString(),
-      'updatedAt': updatedAt.toString(),
+      'category': category?.toJson(),
+      'created_at': createdAt.toString(),
+      'updated_at': updatedAt.toString(),
+      'galleries': galleries?.map((gallery) => gallery.toJson()).toList(),
     };
   }
 }

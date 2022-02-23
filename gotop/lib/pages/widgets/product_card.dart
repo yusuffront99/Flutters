@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gotop/themes/themes.dart';
 
+import '../../models/product_model.dart';
+
 class ProductCard extends StatelessWidget {
+  final ProductModel product;
+
+  ProductCard(this.product);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,8 +28,10 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Image.asset(
-              'assets/images/image_running.png',
+            Image.network(
+              // 'assets/image_example.png',
+              product.galleries![0].url!,
+              // product.galleries![0].url.toString(),
               width: 215,
               height: 150,
               fit: BoxFit.cover,
@@ -34,7 +42,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hiking',
+                    product.category!.name!,
                     style: secondaryTextStyle.copyWith(
                       fontSize: 12,
                     ),
@@ -43,16 +51,17 @@ class ProductCard extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    'COURT VISION 2.0',
+                    product.name!,
                     style: blackTextStyle.copyWith(
                         fontSize: 18, fontWeight: semiBold),
                     overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   SizedBox(
                     height: 6,
                   ),
                   Text(
-                    '\$50,00',
+                    '\$${product.price}',
                     style: priceTextStyle.copyWith(
                       fontSize: 14,
                       fontWeight: medium,

@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:gotop/providers/product_provider.dart';
 import 'package:gotop/themes/themes.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/product_provider.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -14,8 +16,8 @@ class _SplashPageState extends State<SplashPage> {
   //=======
   @override
   void initState() {
-    getInit();
-
+    // TODO: implement initState
+    Timer(Duration(seconds: 2), getInit);
     super.initState();
   }
 

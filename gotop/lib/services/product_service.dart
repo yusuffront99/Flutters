@@ -1,20 +1,20 @@
 import 'dart:convert';
-import 'package:gotop/models/product_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:gotop/models/product_model.dart';
 
 class ProductService {
+  // String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
+
   Future<List<ProductModel>> getProducts() async {
     var url = 'http://192.168.1.15:8000/api/products';
-    var headers = {'Content-Type': 'application/json'};
+    // var headers = {'Content-Type': 'application/json'};
+    //  headers: headers
 
-    var response = await http.get(
-      Uri.parse(url),
-      headers: headers,
-    );
+    var response = await http.get(Uri.parse(url));
 
     print(response.body);
 
-    if (response.body == 200) {
+    if (response.statusCode == 200) {
       List data = jsonDecode(response.body)['data']['data'];
       List<ProductModel> products = [];
 
@@ -24,7 +24,7 @@ class ProductService {
 
       return products;
     } else {
-      throw Exception('Products not found');
+      throw Exception('Gagal Get Products!');
     }
   }
 }
