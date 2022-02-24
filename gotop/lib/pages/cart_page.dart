@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gotop/pages/widgets/cart_card.dart';
+import 'package:gotop/providers/cart_provider.dart';
 import 'package:gotop/themes/themes.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     //=== EMPTY CART
     Widget emptyCart() {
       return Center(
@@ -67,9 +70,11 @@ class CartPage extends StatelessWidget {
     Widget content() {
       return ListView(
         padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-        children: [
-          CartCard(),
-        ],
+        children: cartProvider.carts
+            .map(
+              (cart) => CartCard(cart),
+            )
+            .toList(),
       );
     }
 
@@ -90,7 +95,7 @@ class CartPage extends StatelessWidget {
                     style: primaryTextStyle,
                   ),
                   Text(
-                    '\$287,96',
+                    '\$${cartProvider.totalPrice()}',
                     style: priceTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: semiBold,
@@ -154,8 +159,9 @@ class CartPage extends StatelessWidget {
         title: Text('Your Cart'),
         elevation: 0,
       ),
-      body: content(),
-      bottomNavigationBar: customBottomNav(),
+      body: cartProvider.carts.length == 0 ? emptyCart() : content(),
+      bottomNavigationBar:
+          cartProvider.carts.length == 0 ? SizedBox() : customBottomNav(),
     );
   }
 }
