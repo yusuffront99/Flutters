@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:gotop/models/product_model.dart';
+import 'package:gotop/pages/product_page.dart';
 import 'package:gotop/themes/themes.dart';
 
 class ProductTile extends StatelessWidget {
   final ProductModel product;
   ProductTile(this.product);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductPage(product),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(
