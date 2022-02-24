@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gotop/models/product_model.dart';
+import 'package:gotop/providers/wishlist_provider.dart';
 import 'package:gotop/themes/themes.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatefulWidget {
   final ProductModel product;
@@ -31,10 +33,10 @@ class _ProductPageState extends State<ProductPage> {
   ];
 
   int currentIndex = 0;
-  bool isWishlist = false;
 
   @override
   Widget build(BuildContext context) {
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
     //SHOW DIALOGS
     Future<void> showSuccessDialog() async {
       return showDialog(
@@ -253,11 +255,9 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      setState(() {
-                        isWishlist = !isWishlist;
-                      });
+                      wishlistProvider.setProduct(widget.product);
 
-                      if (isWishlist) {
+                      if (wishlistProvider.isWishlist(widget.product)) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: secondaryColor,
@@ -280,7 +280,7 @@ class _ProductPageState extends State<ProductPage> {
                       }
                     },
                     child: Image.asset(
-                      isWishlist
+                      wishlistProvider.isWishlist(widget.product)
                           ? 'assets/images/button_wishlist_on.png'
                           : 'assets/images/button_wishlist_off.png',
                       width: 46,

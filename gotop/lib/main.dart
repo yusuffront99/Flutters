@@ -11,6 +11,7 @@ import 'package:gotop/pages/sign_up_page.dart';
 import 'package:gotop/pages/splash_page.dart';
 import 'package:gotop/providers/auth_provider.dart';
 import 'package:gotop/providers/product_provider.dart';
+import 'package:gotop/providers/wishlist_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:gotop/providers/auth_provider.dart';
 
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => WishlistProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
