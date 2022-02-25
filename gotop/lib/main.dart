@@ -4,6 +4,7 @@ import 'package:gotop/pages/Home/home_page.dart';
 import 'package:gotop/pages/Home/main_page.dart';
 import 'package:gotop/pages/cart_page.dart';
 import 'package:gotop/pages/checkout_page.dart';
+import 'package:gotop/pages/checkout_success_page.dart';
 import 'package:gotop/pages/detail_chat.dart';
 import 'package:gotop/pages/product_page.dart';
 import 'package:gotop/pages/sign_in_page.dart';
@@ -12,6 +13,7 @@ import 'package:gotop/pages/splash_page.dart';
 import 'package:gotop/providers/auth_provider.dart';
 import 'package:gotop/providers/cart_provider.dart';
 import 'package:gotop/providers/product_provider.dart';
+import 'package:gotop/providers/transaction_provider.dart';
 import 'package:gotop/providers/wishlist_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:gotop/providers/auth_provider.dart';
@@ -34,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TransactionProvider(),
         )
       ],
       child: MaterialApp(
@@ -46,7 +51,8 @@ class MyApp extends StatelessWidget {
           '/detail-chat': (context) => DetailChatPage(),
           '/edit-profile': (context) => editProfilePage(),
           '/cart': (context) => CartPage(),
-          '/checkout': (context) => CheckoutPage()
+          '/checkout': (context) => CheckoutPage(),
+          '/checkout-success': (context) => CheckoutSuccessPage(),
         },
       ),
     );

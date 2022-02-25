@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gotop/pages/widgets/checkout_card.dart';
+import 'package:gotop/providers/auth_provider.dart';
 import 'package:gotop/providers/cart_provider.dart';
+import 'package:gotop/providers/transaction_provider.dart';
 import 'package:gotop/themes/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +11,27 @@ class CheckoutPage extends StatelessWidget {
   //===content
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
+    TransactionProvider transactionProvider =
+        Provider.of<TransactionProvider>(context);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleCheckout() async {
+      if (await transactionProvider.checkout(
+        authProvider.user.token.toString(),
+        cartProvider.carts,
+        cartProvider.totalPrice(),
+      )) {
+        cartProvider.carts = [];
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/checkout-success', (route) => false);
+      }
+    }
+
+    // handleCheckout() async {
+    //   cartProvider.carts = [];
+    //   Navigator.pushNamedAndRemoveUntil(
+    //       context, '/checkout-success', (route) => false);
+    // }
     //====
 
     Widget content() {
@@ -237,10 +260,7 @@ class CheckoutPage extends StatelessWidget {
             width: double.infinity,
             margin: EdgeInsets.symmetric(vertical: defaultMargin),
             child: TextButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/checkout-success', (route) => false);
-              },
+              onPressed: handleCheckout,
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 backgroundColor: primaryColor,
