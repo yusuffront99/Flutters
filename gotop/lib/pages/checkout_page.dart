@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gotop/pages/widgets/checkout_card.dart';
+import 'package:gotop/pages/widgets/loading_button.dart';
 import 'package:gotop/providers/auth_provider.dart';
 import 'package:gotop/providers/cart_provider.dart';
 import 'package:gotop/providers/transaction_provider.dart';
 import 'package:gotop/themes/themes.dart';
 import 'package:provider/provider.dart';
 
-class CheckoutPage extends StatelessWidget {
+class CheckoutPage extends StatefulWidget {
+  @override
+  State<CheckoutPage> createState() => _CheckoutPageState();
+}
+
+class _CheckoutPageState extends State<CheckoutPage> {
+  bool isLoading = false;
   @override
   //===content
   Widget build(BuildContext context) {
@@ -16,6 +23,9 @@ class CheckoutPage extends StatelessWidget {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleCheckout() async {
+      setState(() {
+        isLoading = true;
+      });
       if (await transactionProvider.checkout(
         authProvider.user.token.toString(),
         cartProvider.carts,
@@ -25,6 +35,10 @@ class CheckoutPage extends StatelessWidget {
         Navigator.pushNamedAndRemoveUntil(
             context, '/checkout-success', (route) => false);
       }
+
+      setState(() {
+        isLoading = false;
+      });
     }
 
     // handleCheckout() async {
@@ -255,28 +269,35 @@ class CheckoutPage extends StatelessWidget {
             thickness: 1,
             color: Color(0XFF2E3141),
           ),
-          Container(
-            height: 50,
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(vertical: defaultMargin),
-            child: TextButton(
-              onPressed: handleCheckout,
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                backgroundColor: primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+          isLoading
+              ? Container(
+                  margin: EdgeInsets.only(
+                    bottom: 30,
+                  ),
+                  child: LoadingButton(),
+                )
+              : Container(
+                  height: 50,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: defaultMargin),
+                  child: TextButton(
+                    onPressed: handleCheckout,
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      'Checkout Now',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: semiBold,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              child: Text(
-                'Checkout Now',
-                style: primaryTextStyle.copyWith(
-                  fontSize: 16,
-                  fontWeight: semiBold,
-                ),
-              ),
-            ),
-          ),
         ],
       );
     }
