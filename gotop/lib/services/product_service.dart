@@ -6,7 +6,7 @@ class ProductService {
   // String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
   Future<List<ProductModel>> getProducts() async {
-    var url = 'http://192.168.137.229:8000/api/products';
+    var url = 'http://192.168.1.14:8000/api/products';
     // var headers = {'Content-Type': 'application/json'};
     //  headers: headers
 

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:gotop/models/cart_model.dart';
 
 class TransactionService {
-  String baseUrl = 'http://192.168.137.229:8000/api';
+  String baseUrl = 'http://192.168.1.14:8000/api';
 
   Future<bool> checkout(
       String token, List<CartModel> carts, double totalPrice) async {

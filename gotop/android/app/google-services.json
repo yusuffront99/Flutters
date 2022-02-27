@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "802476996500",
+    "project_id": "gotop-ee4d8",
+    "storage_bucket": "gotop-ee4d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802476996500:android:bb15ea44d9b87cf3b3c181",
+        "android_client_info": {
+          "package_name": "com.yusuffront.gotop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802476996500-kid5387aoufkn5k06hkr7igsbft0co0o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3LcoYcgkzUVT-Um4hI5RxclKaIQMBPMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802476996500-kid5387aoufkn5k06hkr7igsbft0co0o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
