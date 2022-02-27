@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gotop/models/product_model.dart';
 import 'package:gotop/pages/widgets/chat_bubble.dart';
+import 'package:gotop/providers/auth_provider.dart';
+import 'package:gotop/services/message_service.dart';
 import 'package:gotop/themes/themes.dart';
+import 'package:provider/provider.dart';
 
 class DetailChatPage extends StatefulWidget {
   ProductModel product;
@@ -12,8 +15,28 @@ class DetailChatPage extends StatefulWidget {
 }
 
 class _DetailChatPageState extends State<DetailChatPage> {
+  TextEditingController messageController = TextEditingController(text: '');
+  //=======
   @override
   Widget build(BuildContext context) {
+    //===
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    //===
+    handleAddMessage() async {
+      await MessageService().addMessage(
+        user: authProvider.user,
+        isFromUser: true,
+        product: widget.product,
+        message: messageController.text,
+      );
+
+      setState(() {
+        widget.product = UninitializedProductModel();
+        messageController.text = '';
+      });
+    }
+
+    //====
     Widget productPreview() {
       return Container(
         width: 225,
@@ -103,6 +126,8 @@ class _DetailChatPageState extends State<DetailChatPage> {
                     ),
                     child: Center(
                       child: TextFormField(
+                        controller: messageController,
+                        style: primaryTextStyle,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Type Message...',
                           hintStyle: subtitleTextStyle,
@@ -114,9 +139,12 @@ class _DetailChatPageState extends State<DetailChatPage> {
                 SizedBox(
                   width: 20,
                 ),
-                Image.asset(
-                  'assets/images/button_send.png',
-                  width: 45,
+                GestureDetector(
+                  onTap: handleAddMessage,
+                  child: Image.asset(
+                    'assets/images/button_send.png',
+                    width: 45,
+                  ),
                 ),
               ],
             ),
