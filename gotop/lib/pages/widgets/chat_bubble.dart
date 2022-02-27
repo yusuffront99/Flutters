@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gotop/models/product_model.dart';
 import 'package:gotop/themes/themes.dart';
 
 class ChatBubble extends StatelessWidget {
   //==var
   final String text;
   final bool isSender;
-  final bool hasProduct;
+  final ProductModel? Product;
 
-  ChatBubble({this.isSender = false, this.text = '', this.hasProduct = false});
+  ChatBubble({
+    this.isSender = false,
+    this.text = '',
+    this.Product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +121,7 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          hasProduct ? productPreview() : SizedBox(),
+          Product is UninitializedProductModel ? SizedBox() : productPreview(),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
