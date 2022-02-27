@@ -7,12 +7,12 @@ class ChatBubble extends StatelessWidget {
   //==var
   final String text;
   final bool isSender;
-  final ProductModel? Product;
+  final ProductModel? product;
 
   ChatBubble({
     this.isSender = false,
     this.text = '',
-    this.Product,
+    this.product,
   });
 
   @override
@@ -38,8 +38,8 @@ class ChatBubble extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'assets/images/image_running.png',
+                  child: Image.network(
+                    product!.galleries![0].url!,
                     width: 70,
                   ),
                 ),
@@ -51,14 +51,14 @@ class ChatBubble extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'COURT VISION 2.0 SHOES',
+                        product!.name!,
                         style: primaryTextStyle,
                       ),
                       SizedBox(
                         height: 4,
                       ),
                       Text(
-                        '\$57.15',
+                        '\$${product!.price!}',
                         style: priceTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -121,7 +121,7 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Product is UninitializedProductModel ? SizedBox() : productPreview(),
+          product is UninitializedProductModel ? SizedBox() : productPreview(),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,

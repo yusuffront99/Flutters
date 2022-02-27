@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gotop/models/message_model.dart';
 import 'package:gotop/pages/widgets/chat_tile.dart';
+import 'package:gotop/providers/auth_provider.dart';
+import 'package:gotop/services/message_service.dart';
 import 'package:gotop/themes/themes.dart';
+import 'package:provider/provider.dart';
 
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //===
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
     //==== HEADER
     Widget header() {
       return AppBar(
@@ -86,20 +92,33 @@ class ChatPage extends StatelessWidget {
 
     //==== EMPTY CHAT
     Widget content() {
-      return Expanded(
-        child: Container(
-          color: backgroundColor3,
-          width: double.infinity,
-          child: ListView(
-            padding: EdgeInsets.symmetric(
-              horizontal: defaultMargin,
-            ),
-            children: [
-              ChatTile(),
-            ],
-          ),
-        ),
-      );
+      return StreamBuilder<List<MessageModel>>(
+          stream:
+              MessageService().getMessageByUserId(userId: authProvider.user.id),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              //=== EMPTY MESSAGE
+              if (snapshot.data!.length == 0) {
+                return emptyChat();
+              }
+              return Expanded(
+                child: Container(
+                  color: backgroundColor3,
+                  width: double.infinity,
+                  child: ListView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: defaultMargin,
+                    ),
+                    children: [
+                      ChatTile(snapshot.data![snapshot.data!.length - 1]),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return emptyChat();
+            }
+          });
     }
 
     return Column(

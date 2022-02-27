@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gotop/models/message_model.dart';
 import 'package:gotop/models/product_model.dart';
 import 'package:gotop/pages/detail_chat_page.dart';
 import 'package:gotop/themes/themes.dart';
 
 class ChatTile extends StatelessWidget {
+  final MessageModel message;
+  ChatTile(this.message);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,7 +44,7 @@ class ChatTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Hello, this item ready stock?',
+                        message.message!,
                         style: secondaryTextStyle.copyWith(
                           fontWeight: light,
                         ),
