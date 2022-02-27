@@ -51,3 +51,6 @@ class ProductModel {
     };
   }
 }
+
+//====== FIREBASE CHAT LIVE
+class UninitializedProductModel extends ProductModel {}

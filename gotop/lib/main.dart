@@ -6,7 +6,7 @@ import 'package:gotop/pages/Home/main_page.dart';
 import 'package:gotop/pages/cart_page.dart';
 import 'package:gotop/pages/checkout_page.dart';
 import 'package:gotop/pages/checkout_success_page.dart';
-import 'package:gotop/pages/detail_chat.dart';
+import 'package:gotop/pages/detail_chat_page.dart';
 import 'package:gotop/pages/product_page.dart';
 import 'package:gotop/pages/sign_in_page.dart';
 import 'package:gotop/pages/sign_up_page.dart';
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/sign-up': (context) => SignUpPage(),
           '/home': (context) => MainPage(),
-          '/detail-chat': (context) => DetailChatPage(),
+          // '/detail-chat': (context) => DetailChatPage(),
           '/edit-profile': (context) => editProfilePage(),
           '/cart': (context) => CartPage(),
           '/checkout': (context) => CheckoutPage(),
