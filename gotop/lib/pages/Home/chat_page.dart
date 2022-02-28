@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gotop/models/message_model.dart';
 import 'package:gotop/pages/widgets/chat_tile.dart';
 import 'package:gotop/providers/auth_provider.dart';
+import 'package:gotop/providers/page_provider.dart';
 import 'package:gotop/services/message_service.dart';
 import 'package:gotop/themes/themes.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //===
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
     //==== HEADER
     Widget header() {
       return AppBar(
@@ -64,7 +66,9 @@ class ChatPage extends StatelessWidget {
               Container(
                 height: 44,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    pageProvider.currentIndex = 0;
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(
                       horizontal: 24,

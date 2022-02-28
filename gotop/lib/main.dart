@@ -13,6 +13,7 @@ import 'package:gotop/pages/sign_up_page.dart';
 import 'package:gotop/pages/splash_page.dart';
 import 'package:gotop/providers/auth_provider.dart';
 import 'package:gotop/providers/cart_provider.dart';
+import 'package:gotop/providers/page_provider.dart';
 import 'package:gotop/providers/product_provider.dart';
 import 'package:gotop/providers/transaction_provider.dart';
 import 'package:gotop/providers/wishlist_provider.dart';
@@ -44,7 +45,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TransactionProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => PageProvider()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -4,10 +4,13 @@ import 'package:gotop/providers/wishlist_provider.dart';
 import 'package:gotop/themes/themes.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/page_provider.dart';
+
 class WishListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
     //=== HEADER
     Widget header() {
       return AppBar(
@@ -57,7 +60,9 @@ class WishListPage extends StatelessWidget {
               Container(
                 height: 44,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    pageProvider.currentIndex = 0;
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(
                       vertical: 10,
